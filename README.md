@@ -1,6 +1,6 @@
 # BlogAngular
 
-Angular back-end for an application web.
+Angular back-end for a blog application web.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.4.
 
