@@ -1,1 +1,61 @@
-<p>new-category works!</p>
+<br/>
+<h2>{{title}}</h2>
+<div class="col-md-12 mt-4">
+  <h3>Create Category</h3>
+  <p>Create a new category here</p>
+
+  <br/>
+  <div class="alert alert-warning" role="alert" *ngIf="status == 'Error'"><a class='close' data-dismiss='alert'>×</a>
+    {{message}}, try again!
+  </div>
+  <div class="alert alert-success" role="alert" *ngIf="status == 'Success'"><a class='close' data-dismiss='alert'>×</a>
+    {{message}}!
+  </div>
+
+  <form class="" #createCategoryForm="ngForm" (ngSubmit)="onSubmitCreate(createCategoryForm)">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="category.name" required pattern="[a-zA-Z]+">
+      <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
+        Name is not valid
+      </small>
+    </div>
+
+    <div class="text-righ">
+      <input type="submit" class="btn btn-primary" value="Submit" [disabled]="createCategoryForm.invalid"/>
+    </div>
+  </form>
+</div>
+
+<br/><hr style="width:100%;"><br/>
+
+<div class="col-md-12 mt-4">
+  <h3>Update Category</h3>
+  <p>Update a category here</p>
+
+  <br/>
+  <form class="" #updateCategoryForm="ngForm" (ngSubmit)="onSubmitUpdate(updateCategoryForm)">
+    <div class="form-group">
+      <label for="id">Select the category to update</label>
+      <select name="id" class="form-control" [(ngModel)]="category.id" #id="ngModel" required>
+        <option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</option>
+      </select>
+      <small *ngIf="!id.valid && id.value === 0" class="invalid-feedback d-block">
+        You must select a category
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="name">New name</label>
+      <input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="category.name" required pattern="[a-zA-Z]+">
+      <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
+        Name is not valid
+      </small>
+    </div>
+
+    <div class="text-righ">
+      <input type="submit" class="btn btn-primary" value="Submit" [disabled]="updateCategoryForm.invalid"/>
+    </div>
+  </form>
+
+</div>

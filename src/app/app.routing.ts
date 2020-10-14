@@ -6,6 +6,8 @@ import { HomeComponent } from './components/home/home.component';
 import { ErrorComponent } from './components/error/error.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { NewCategoryComponent } from './components/new-category/new-category.component';
+import { PostByCategoryComponent } from './components/post-by-category/post-by-category.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 //Defining routes
 const routes: Routes = [
@@ -15,7 +17,9 @@ const routes: Routes = [
   {path: 'register', component:RegisterComponent},
   {path: 'home', component:HomeComponent},
   {path: 'settings', component:UserEditComponent},
-  {path: 'newCategory', component:NewCategoryComponent},
+  {path: 'categorySettings', component:NewCategoryComponent},
+  {path: 'postByCategory/:category', component:PostByCategoryComponent},
+  {path: 'profile', component:ProfileComponent},
   {path: '**', component:ErrorComponent}
 ];
 

@@ -13,6 +13,8 @@ import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { AngularFileUploaderModule } from 'angular-file-uploader';
 import { NewCategoryComponent } from './components/new-category/new-category.component';
+import { PostByCategoryComponent } from './components/post-by-category/post-by-category.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { NewCategoryComponent } from './components/new-category/new-category.com
     HomeComponent,
     ErrorComponent,
     UserEditComponent,
-    NewCategoryComponent
+    NewCategoryComponent,
+    PostByCategoryComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
