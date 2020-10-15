@@ -15,6 +15,7 @@ import { AngularFileUploaderModule } from 'angular-file-uploader';
 import { NewCategoryComponent } from './components/new-category/new-category.component';
 import { PostByCategoryComponent } from './components/post-by-category/post-by-category.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { NewPostComponent } from './components/new-post/new-post.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     UserEditComponent,
     NewCategoryComponent,
     PostByCategoryComponent,
-    ProfileComponent
+    ProfileComponent,
+    NewPostComponent
   ],
   imports: [
     BrowserModule,

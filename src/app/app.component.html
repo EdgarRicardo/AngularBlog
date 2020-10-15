@@ -1,77 +1,79 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" [routerLink]="['/home']">
-    <img src="assets/images/logo.PNG" width="40" height="40" class="d-inline-block align-top" alt="">
-    Personal Blog
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" [routerLink]="['/home']">
+      <img src="assets/images/logo.PNG" width="40" height="40" class="d-inline-block align-top" alt="">
+      Personal Blog
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/home']" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <ul class="navbar-nav navbar-left" *ngIf="categories">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/home']" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <ul class="navbar-nav navbar-left" *ngIf="categories">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Categories
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" *ngFor="let cat of categories" [routerLink]="['/postByCategory', cat.id]">{{cat.name}}</a>
+            </div>
+          </li>
+        </ul>
+      </ul>
+
+
+
+      <ul class="navbar-nav navbar-rigth" *ngIf="!userInfo">
+        <li class="nav-item dropdown">
+          <a class="nav-link" [routerLink]="['/login']" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Login
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" [routerLink]="['/register']" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sign up
+          </a>
+        </li>
+      </ul>
+
+
+
+      <ul class="navbar-nav navbar-rigth dropleft" *ngIf="userInfo">
+        <li *ngIf="userInfo.image" class="nav-item">
+          <img src="{{url + 'getAvatar/' + userInfo.image}}" class="img-circle float-right " style="width: 12%; border-radius: 100%">
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Categories
+            <b>{{userInfo.name + ' ' + userInfo.surname}}</b>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" *ngFor="let cat of categories" [routerLink]="['/postByCategory', cat.id]">{{cat.name}}</a>
+            <a class="dropdown-item" [routerLink]="['/newPost']">Create Post</a>
+            <a class="dropdown-item" [routerLink]="[ '/categorySettings']" *ngIf="userInfo.role == 'Admin'">Category Settings</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" [routerLink]="[ '/profile']">Profile</a>
+            <a class="dropdown-item" [routerLink]="[ '/settings']">Settings</a>
+            <a class="dropdown-item" [routerLink]="[ '/logout/1']">Log out</a>
           </div>
         </li>
       </ul>
-    </ul>
 
+      <ul class="navbar-nav navbar-rigth" *ngIf="!userInfo">
+        <b>Guest</b>
+      </ul>
 
+      <!--<form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>-->
 
-    <ul class="navbar-nav navbar-rigth" *ngIf="!userInfo">
-      <li class="nav-item dropdown">
-        <a class="nav-link" [routerLink]="['/login']" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Login
-        </a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link" [routerLink]="['/register']" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Sign up
-        </a>
-      </li>
-    </ul>
-
-
-
-    <ul class="navbar-nav navbar-rigth dropleft" *ngIf="userInfo">
-      <li *ngIf="userInfo.image" class="nav-item">
-        <img src="{{url + 'getAvatar/' + userInfo.image}}" class="img-circle float-right " style="width: 7%; border-radius: 50%">
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <b>{{userInfo.name + ' ' + userInfo.surname}}</b>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Create Post</a>
-          <a class="dropdown-item" [routerLink]="[ '/categorySettings']" *ngIf="userInfo.role == 'Admin'">Category Settings</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" [routerLink]="[ '/profile']">Profile</a>
-          <a class="dropdown-item" [routerLink]="[ '/settings']">Settings</a>
-          <a class="dropdown-item" [routerLink]="[ '/logout/1']">Log out</a>
-        </div>
-      </li>
-    </ul>
-
-    <ul class="navbar-nav navbar-rigth" *ngIf="!userInfo">
-      <b>Guest</b>
-    </ul>
-
-    <!--<form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>-->
-
+    </div>
   </div>
 </nav>
-<div class="container">
-<!-- Content -->
-<router-outlet></router-outlet>
+<div class="container ">
+  <!-- Content -->
+  <router-outlet></router-outlet>
 </div>

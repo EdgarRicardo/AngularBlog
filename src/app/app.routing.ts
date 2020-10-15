@@ -8,6 +8,7 @@ import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { NewCategoryComponent } from './components/new-category/new-category.component';
 import { PostByCategoryComponent } from './components/post-by-category/post-by-category.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { NewPostComponent } from './components/new-post/new-post.component';
 
 //Defining routes
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'categorySettings', component:NewCategoryComponent},
   {path: 'postByCategory/:category', component:PostByCategoryComponent},
   {path: 'profile', component:ProfileComponent},
+  {path: 'newPost', component:NewPostComponent},
   {path: '**', component:ErrorComponent}
 ];
 

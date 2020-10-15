@@ -1,5 +1,5 @@
 <div class="col-md-12 mt-4">
-  <h1>{{title}} : <b>{{categoryName}}</b></h1>
+  <h1><b style="text-transform: uppercase;">{{categoryName}}</b></h1>
   <h4 *ngIf="posts">Post</h4>
   <p *ngIf="!posts">There aren't posts for this category</p>
   <p *ngFor="let post of posts">{{post.title}}</p>
