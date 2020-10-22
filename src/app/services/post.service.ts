@@ -30,6 +30,8 @@ export class PostService {
       return this._http.put(this.url+link, data, {headers: headers});
     else if (type == 'get')
       return this._http.get(this.url+link);
+    else if (type == 'delete')
+      return this._http.delete(this.url+link, {headers: headers});
   }
 
   register(category, token){
@@ -47,5 +49,13 @@ export class PostService {
 
   getPostsByUser(id){
     return this.request(null, 'postsUser/'+id,'get');
+  }
+
+  getPosts(){
+    return this.request(null, 'getPosts/','get');
+  }
+
+  deletePost(id, token){
+    return this.request(null, 'post/'+id,'delete', token);
   }
 }

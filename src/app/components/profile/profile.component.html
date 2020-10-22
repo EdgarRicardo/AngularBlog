@@ -1,6 +1,58 @@
-<div class="col-md-12 mt-4">
-  <h1>{{title}}</h1>
-  <h4 *ngIf="posts">Post</h4>
-  <p *ngIf="!posts">There aren't posts for you :(</p>
-  <p *ngFor="let post of posts">{{post.title}}</p>
+<br/>
+<div class="col-md-12">
+  <br/>
+
+  <div class="alert alert-warning" role="alert" *ngIf="status == 'Error'"><a class='close' data-dismiss='alert'>×</a>
+    Problem deleting the post, try again!
+  </div>
+  <div class="alert alert-success" role="alert" *ngIf="status == 'Success'"><a class='close' data-dismiss='alert'>×</a>
+    The post was deleted!
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6 col-md-4 pad d-flex" *ngFor="let post of posts">
+      <br>
+      <div class="row justify-content-around border">
+        <div><b>{{post.title}}</b></div>
+        <hr style="width:100%;">
+        <div align="center" class="">
+          <img src="{{url + 'getImage/' + post.image}}" alt="There is not image for this posts" class="img-thumbnail" style="width: 75%;">
+        </div>
+        <hr style="width:100%;">
+        <div class="row">
+          <button type="button" class="btn btn-outline-info btn-sm">See</button> &nbsp;
+          <button type="button" class="btn btn-outline-warning btn-sm">Edit</button> &nbsp;
+          <button (click)="loadIDpost(post.id)" type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deletePostModal">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<div class="modal fade" id="deletePostModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"
+            aria-hidden="true">×
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id = "question">Do you really want to delete this post?</p>
+        <input type="hidden" name="id" [(ngModel)]="idPost" #id="ngModel">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default"
+            data-dismiss="modal">cancel
+        </button>
+        <button type='submit' class='btn btn-primary' (click)="deletePost()" data-dismiss="modal">
+          Yes
+        </button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+

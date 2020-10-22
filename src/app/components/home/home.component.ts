@@ -21,6 +21,8 @@ export class HomeComponent implements OnInit{
   public categories;
   public posts;
   public status;
+  public idPost;
+
 
   constructor(public _userService: UserService,
     public _categoryService: CategoryService,
@@ -36,7 +38,7 @@ export class HomeComponent implements OnInit{
   }
 
   loadUser(){
-    this.userInfo = this._userService.getInfoUser();
+    this.userInfo = this._userService.getInfoUser() ?? -1;
     this.token = this._userService.getToken();
   }
 
@@ -45,14 +47,14 @@ export class HomeComponent implements OnInit{
       response => {
         console.log(response.categories);
         this.categories = response.categories;
-        if(Object.keys(this.categories).length > 0 && this.userInfo != null){
+        if(Object.keys(this.categories).length > 0){
           this.getPosts();
         }
       });
   }
 
   getPosts(){
-    this._postService.getPostsByUser(this.userInfo.sub).subscribe(
+    this._postService.getPosts().subscribe(
       response => {
         if(Object.keys(response.post).length === 0) this.posts = null;
         else {
@@ -61,7 +63,7 @@ export class HomeComponent implements OnInit{
             let categoryName = this.categories[element.category_id-1];
             element.categoryName = categoryName.name;
           });
-          console.log(this.posts);
+          console.log(response);
         }
         //this.message = response.message;
       },
@@ -73,4 +75,22 @@ export class HomeComponent implements OnInit{
     );
   }
 
+  loadIDpost(id){
+    this.idPost = id;
+  }
+
+  deletePost(){
+    this._postService.deletePost(this.idPost, this.token).subscribe(
+      response => {
+        this.status = response.status;
+        this.getPosts();
+        console.log(response);
+      },
+      er => {
+        this.status = er.error.status;
+        //this.message = er.error.message;
+        console.log(<any>er);
+      }
+    );
+  }
 }

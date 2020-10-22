@@ -82,6 +82,7 @@ export class NewPostComponent implements OnInit {
         console.log(response);
         this.status = response.status;
         this.message = response.message;
+        form.reset();
         this.getCategories();
       },
       er => {

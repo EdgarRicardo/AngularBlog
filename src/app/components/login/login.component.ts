@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', response.token);
           localStorage.setItem('userInfo', JSON.stringify(response.userInfo));
 
-          this._router.navigate(['/home']);
+          this._router.navigate(['/home',1]);
           form.reset();
         },
         er => {
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
       if(+params['sure']){
         localStorage.removeItem('userInfo');
         localStorage.removeItem('token');
-        this._router.navigate(['/home']);
+        this._router.navigate(['/home',1]);
       }
     });
     //this._router.navigate(['/home']);
