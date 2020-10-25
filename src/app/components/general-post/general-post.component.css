@@ -1,8 +1,19 @@
 @media all {
   .pad {
-    padding: 7% 7% 7% 7%;
+    padding: 7% 7% 0% 7%;
+  }
+  img{
+    max-width:50%;
   }
 
+  .box{
+    height: 30em;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 10px;
+    overflow: auto;
+    text-align: justify;
+  }
 }
 
 
@@ -10,13 +21,13 @@
   button, b, img {
     font-size: 0.8em;
   }
+  img{
+    max-width:65%;
+  }
 }
 
 
-@media all and (max-width: 520px) {
-  img{
-    max-width:200px;
-  }
+@media all and (max-width: 720px) {
   button, b, img {
     font-size: calc(0.5em + .9vw);
   }

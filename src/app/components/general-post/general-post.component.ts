@@ -8,7 +8,7 @@ import { UserService } from 'src/app/services/user.service';
   selector: 'general-post',
   templateUrl: './general-post.component.html',
   styleUrls: ['./general-post.component.css'],
-  providers: [UserService, CategoryService, PostService]
+  providers: [UserService, PostService]
 })
 export class GeneralPostComponent implements OnInit {
 
@@ -19,9 +19,10 @@ export class GeneralPostComponent implements OnInit {
   @Input()  posts;
   public  status;
   public  idPost;
+  public postTS; // Post to see
+  //public height;
 
   constructor(public _userService: UserService,
-    public _categoryService: CategoryService,
     public _postService: PostService){
     this.loadUser();
     this.url = global_info.url;
@@ -56,14 +57,22 @@ export class GeneralPostComponent implements OnInit {
     );
   }
 
-  deletePostOfArray(id){
+  getPosOfPostInArray(id){
     for (let index = 0; index < this.posts.length; index++) {
       const post = this.posts[index];
-      if(post.id == id ){
-        this.posts.splice(index,1);
-        break;
-      }
+      if(post.id == id ) return index;
     }
+    return null;
   }
 
+  deletePostOfArray(id){
+    this.posts.splice(this.getPosOfPostInArray(id),1);
+  }
+
+  getPostToSee(id){
+    this.postTS = this.posts[this.getPosOfPostInArray(id)];
+    let posDate = this.postTS.created_at.indexOf("T");
+    this.postTS.created_at = this.postTS.created_at.substr(0,posDate);
+
+  }
 }
