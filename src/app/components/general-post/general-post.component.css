@@ -1,0 +1,23 @@
+@media all {
+  .pad {
+    padding: 7% 7% 7% 7%;
+  }
+
+}
+
+
+@media all and (max-width: 1200px) {
+  button, b, img {
+    font-size: 0.8em;
+  }
+}
+
+
+@media all and (max-width: 520px) {
+  img{
+    max-width:200px;
+  }
+  button, b, img {
+    font-size: calc(0.5em + .9vw);
+  }
+}

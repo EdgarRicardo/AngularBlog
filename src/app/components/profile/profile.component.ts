@@ -15,12 +15,10 @@ export class ProfileComponent implements OnInit {
   public userInfo;
   public status;
   public posts = null;
-  public url;
-  public idPost;
+
 
   constructor(public _postService: PostService,
     public _userService: UserService) {
-      this.url = global_info.url;
       this.loadUser();
   }
 
@@ -40,25 +38,6 @@ export class ProfileComponent implements OnInit {
         if(Object.keys(response.post).length === 0) this.posts = null;
         else this.posts = response.post;
         //this.message = response.message;
-      },
-      er => {
-        this.status = er.error.status;
-        //this.message = er.error.message;
-        console.log(<any>er);
-      }
-    );
-  }
-
-  loadIDpost(id){
-    this.idPost = id;
-  }
-
-  deletePost(){
-    this._postService.deletePost(this.idPost, this.token).subscribe(
-      response => {
-        this.status = response.status;
-        this.getPosts();
-        console.log(response);
       },
       er => {
         this.status = er.error.status;
