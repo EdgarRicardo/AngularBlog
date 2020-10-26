@@ -16,6 +16,7 @@ import { NewCategoryComponent } from './components/new-category/new-category.com
 import { PostByCategoryComponent } from './components/post-by-category/post-by-category.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { NewPostComponent } from './components/new-post/new-post.component';
+import { GeneralPostComponent } from './components/general-post/general-post.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NewPostComponent } from './components/new-post/new-post.component';
     NewCategoryComponent,
     PostByCategoryComponent,
     ProfileComponent,
-    NewPostComponent
+    NewPostComponent,
+    GeneralPostComponent
   ],
   imports: [
     BrowserModule,

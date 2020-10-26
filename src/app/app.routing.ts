@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'login', component:LoginComponent},
   {path: 'logout/:sure', component:LoginComponent},
   {path: 'register', component:RegisterComponent},
-  {path: 'home/:status', component:HomeComponent},
+  {path: 'home', component:HomeComponent},
   {path: 'settings', component:UserEditComponent},
   {path: 'categorySettings', component:NewCategoryComponent},
   {path: 'postByCategory/:category', component:PostByCategoryComponent},

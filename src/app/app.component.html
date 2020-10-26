@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light">
   <div class="container">
-    <a class="navbar-brand" [routerLink]="['/home',1]">
+    <a class="navbar-brand" [routerLink]="['/home']">
       <img src="assets/images/logo.PNG" width="40" height="40" class="d-inline-block align-top" alt="">
       Personal Blog
     </a>
@@ -11,7 +11,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/home',1]" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" [routerLink]="['/home']" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home <span class="sr-only">(current)</span></a>
         </li>
         <ul class="navbar-nav navbar-left" *ngIf="categories">
           <li class="nav-item dropdown">

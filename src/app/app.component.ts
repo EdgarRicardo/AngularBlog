@@ -19,7 +19,7 @@ export class AppComponent implements OnInit, DoCheck{
 
   constructor(public _userService: UserService,
     public _categoryService: CategoryService){
-    //this.loadUser();
+    this.loadUser();
     this.getCategories();
     this.url = global_info.url;
   }
@@ -27,7 +27,6 @@ export class AppComponent implements OnInit, DoCheck{
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     console.log('Page loaded correctly');
-    this.loadUser();
   }
 
   ngDoCheck(): void {
