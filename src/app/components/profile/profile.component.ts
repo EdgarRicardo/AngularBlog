@@ -13,8 +13,8 @@ export class ProfileComponent implements OnInit {
   public title = 'Your posts';
   public token;
   public userInfo;
-  public status;
-  public posts = null;
+  public status: string;
+  public posts: Array<Object> = null;
 
 
   constructor(public _postService: PostService,

@@ -15,10 +15,10 @@ export class NewCategoryComponent implements OnInit {
   public title = 'Category Settings';
   public token;
   public userInfo;
-  public status;
+  public status: string;
   public category: Category;
-  public categories;
-  public message;
+  public categories: Array<Object>;
+  public message: string;
   constructor(public _userService: UserService, public _categoryService: CategoryService) {
     this.loadUser();
     this.getCategories();
