@@ -14,10 +14,10 @@ export class PostByCategoryComponent implements OnInit, DoCheck {
   public title = 'Post By Category';
   public token;
   public userInfo;
-  public status;
-  public posts = null;
-  public idCategory;
-  public categoryName;
+  public status: string;
+  public posts: Array<Object> = null;
+  public idCategory: number;
+  public categoryName: string;
 
 
   constructor(

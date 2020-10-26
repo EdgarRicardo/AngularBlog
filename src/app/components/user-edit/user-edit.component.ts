@@ -16,7 +16,7 @@ export class UserEditComponent implements OnInit {
   public user: User;
   public status: string;
   public afuConfig;
-  public url;
+  public url: string;
   constructor(public _userService: UserService) {
     this.loadUser();
     this.url = global_info.url;
@@ -69,6 +69,7 @@ export class UserEditComponent implements OnInit {
     this._userService.update(this.user, this.token).subscribe(
       response => {
         console.log(response);
+        response.user.sub = response.user.id;
         localStorage.setItem('userInfo',JSON.stringify(response.user));
         this.userInfo = this._userService.getInfoUser();
         //if(!this.userInfo.email.localeCompare(response.user.email))

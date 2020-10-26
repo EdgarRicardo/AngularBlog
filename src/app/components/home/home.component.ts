@@ -17,8 +17,8 @@ export class HomeComponent implements OnInit{
   title = 'Personal Blog';
   public userInfo;
   public token;
-  public posts;
-  public status;
+  public posts: Array<Object>;
+  public status: string;
 
 
   constructor(public _userService: UserService,

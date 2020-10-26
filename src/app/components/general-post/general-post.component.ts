@@ -11,15 +11,13 @@ import { UserService } from 'src/app/services/user.service';
   providers: [UserService, PostService]
 })
 export class GeneralPostComponent implements OnInit {
-
-  title = 'Personal Blog';
   public userInfo;
   public  token;
-  public  url;
-  @Input()  posts;
-  public  status;
-  public  idPost;
-  public postTS; // Post to see
+  public  url: string;
+  @Input()  posts: Array<any>;
+  public  status: string;
+  public  idPost: number;
+  public postTS ; // Post to see
   //public height;
 
   constructor(public _userService: UserService,
@@ -57,10 +55,14 @@ export class GeneralPostComponent implements OnInit {
     );
   }
 
-  getPosOfPostInArray(id){
-    for (let index = 0; index < this.posts.length; index++) {
+  //Binary Search of ID
+  getPosOfPostInArray(id, start = 0, end = this.posts.length -1){
+    let index = Math.round(start + (end - start) / 2);
+    if(end >= start){
       const post = this.posts[index];
       if(post.id == id ) return index;
+      if(post.id > id ) return this.getPosOfPostInArray(id,start,index-1);
+      return this.getPosOfPostInArray(id,index+1,end);
     }
     return null;
   }
@@ -73,6 +75,5 @@ export class GeneralPostComponent implements OnInit {
     this.postTS = this.posts[this.getPosOfPostInArray(id)];
     let posDate = this.postTS.created_at.indexOf("T");
     this.postTS.created_at = this.postTS.created_at.substr(0,posDate);
-
   }
 }

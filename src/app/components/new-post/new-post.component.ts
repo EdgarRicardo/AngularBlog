@@ -13,13 +13,13 @@ import { UserService } from 'src/app/services/user.service';
 export class NewPostComponent implements OnInit {
   public title_page = 'New Post';
   public post: Post;
-  public status;
-  public categories;
+  public status: string;
+  public categories: Array<Object>;
   public userInfo;
   public token;
   public afuConfig;
-  public message;
-  public url;
+  public message: string;
+  public url: string;
 
   constructor(public _postService: PostService,
     public _userService: UserService,
