@@ -61,5 +61,9 @@ export class UserService {
       return this.userInfo;
   }
 
+  tokenValidation(token){
+    return this.request(null, 'tokenValidation','post',token);
+  }
+
 
 }

@@ -17,6 +17,8 @@ import { PostByCategoryComponent } from './components/post-by-category/post-by-c
 import { ProfileComponent } from './components/profile/profile.component';
 import { NewPostComponent } from './components/new-post/new-post.component';
 import { GeneralPostComponent } from './components/general-post/general-post.component';
+import { IdentityGuard } from './services/identity.guard';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { GeneralPostComponent } from './components/general-post/general-post.com
     AngularFileUploaderModule
   ],
   providers: [
-    routingProviders
+    routingProviders,
+    IdentityGuard,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

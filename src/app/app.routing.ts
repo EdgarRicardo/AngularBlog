@@ -9,6 +9,7 @@ import { NewCategoryComponent } from './components/new-category/new-category.com
 import { PostByCategoryComponent } from './components/post-by-category/post-by-category.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { NewPostComponent } from './components/new-post/new-post.component';
+import { IdentityGuard } from './services/identity.guard';
 
 //Defining routes
 const routes: Routes = [
@@ -17,12 +18,13 @@ const routes: Routes = [
   {path: 'logout/:sure', component:LoginComponent},
   {path: 'register', component:RegisterComponent},
   {path: 'home', component:HomeComponent},
-  {path: 'settings', component:UserEditComponent},
-  {path: 'categorySettings', component:NewCategoryComponent},
+  {path: 'settings', component:UserEditComponent, canActivate: [IdentityGuard]},
+  {path: 'categorySettings', component:NewCategoryComponent, canActivate: [IdentityGuard]},
   {path: 'postByCategory/:category', component:PostByCategoryComponent},
-  {path: 'profile', component:ProfileComponent},
-  {path: 'newPost', component:NewPostComponent},
-  {path: '**', component:ErrorComponent}
+  {path: 'profile', component:ProfileComponent, canActivate: [IdentityGuard]},
+  {path: 'newPost', component:NewPostComponent, canActivate: [IdentityGuard]},
+  {path: '**', component:ErrorComponent},
+  {path: 'error', component:ErrorComponent}
 ];
 
 //Importing configuration
