@@ -23,7 +23,7 @@ export class UserEditComponent implements OnInit {
     this.user = new User(1,
       this.userInfo.name,
       this.userInfo.surname,
-      'Normal',
+      this.userInfo.role,
       this.userInfo.email, '',
       this.userInfo.description,
       this.userInfo.image);

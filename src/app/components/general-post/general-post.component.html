@@ -20,7 +20,7 @@
           <hr style="width:100%;">
           <div class="row d-flex align-items-center">
             <button type="button" (click)="getPostToSee(post.id)" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#seePostModal">See</button> &nbsp;
-            <button *ngIf="userInfo.sub == post.user_id" (click)="loadIDpost(post.id)" type="button" class="btn btn-outline-warning btn-sm ">Edit</button> &nbsp;
+            <button *ngIf="userInfo.sub == post.user_id" (click)="getPostToSee(post.id)" type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#editPostModal">Edit</button> &nbsp;
             <button *ngIf="userInfo.sub == post.user_id" (click)="loadIDpost(post.id)" type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deletePostModal">Delete</button>
           </div>
         </div>
@@ -39,7 +39,7 @@
       </div>
       <div class="modal-body">
         <p id = "question">Do you really want to delete this post?</p>
-        <input type="hidden" name="id" [(ngModel)]="idPost" #id="ngModel">
+        <input type="hidden" name="id" [(ngModel)]="postTS.id" #id="ngModel">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default"
@@ -84,6 +84,75 @@
     </div>
   </div>
 </div>
+
+<div *ngIf="postTS" class="modal fade" id="editPostModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h4 class="modal-title">
+            <b>Modify your post</b>
+          </h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-12 mt-4">
+          <div *ngIf="postTS.image" class="text-center">
+            <img src="{{url + 'getImage/' + postTS.image}}" class="img-thumbnail" style="width: 40%;">
+          </div>
+
+          <form class="" #postForm="ngForm" (ngSubmit)="modifyPost(postForm)">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" name="title" class="form-control" #title="ngModel" [(ngModel)]="postTS.title" required>
+              <small *ngIf="!title.valid && title.touched" class="invalid-feedback d-block">
+                Title is not valid
+              </small>
+            </div>
+
+            <div class="form-group">
+              <label for="id">Category</label>
+              <select name="category_id" class="form-control" [(ngModel)]="postTS.category_id" #category_id="ngModel" required>
+                <option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="content">Content</label>
+              <textarea type="text" name="description" class="form-control" #content="ngModel" [(ngModel)]="postTS.content" required></textarea>
+              <small *ngIf="!content.valid && content.touched" class="invalid-feedback d-block">
+                Content is not valid
+              </small>
+            </div>
+
+            <div class="form-group">
+              <label for="avatar">Image</label>
+              <angular-file-uploader
+                [config]="afuConfig"
+                [resetUpload]=resetBtn
+                (ApiResponse)="imageUpload($event)">
+              </angular-file-uploader>
+            </div>
+
+            <div class="alert alert-warning" role="alert" *ngIf="statusEdit == 'Error'"><a class='close' data-dismiss='alert'>×</a>
+              Problem updating post, try again!
+            </div>
+            <div class="alert alert-success" role="alert" *ngIf="statusEdit == 'Success'"><a class='close' data-dismiss='alert'>×</a>
+              Post update successful!
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <input type="submit" class="btn btn-primary" value="Submit" [disabled]="postForm.invalid"/>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <br/>
+
 
 

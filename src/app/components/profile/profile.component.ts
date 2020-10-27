@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Post } from 'src/app/Models/post';
 import { global_info } from 'src/app/services/global_info';
 import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
@@ -14,7 +15,7 @@ export class ProfileComponent implements OnInit {
   public token;
   public userInfo;
   public status: string;
-  public posts: Array<Object> = null;
+  public posts: Array<Post> = null;
 
 
   constructor(public _postService: PostService,

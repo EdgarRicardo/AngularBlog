@@ -3,6 +3,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
 import { ActivatedRoute, Router, Params } from '@angular/router';
+import { Post } from 'src/app/Models/post';
 
 @Component({
   selector: 'app-post-by-category',
@@ -15,7 +16,7 @@ export class PostByCategoryComponent implements OnInit, DoCheck {
   public token;
   public userInfo;
   public status: string;
-  public posts: Array<Object> = null;
+  public posts: Array<Post> = null;
   public idCategory: number;
   public categoryName: string;
 

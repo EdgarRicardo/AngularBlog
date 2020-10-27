@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Post } from 'src/app/Models/post';
 import { CategoryService } from 'src/app/services/category.service';
 import { global_info } from 'src/app/services/global_info';
 import { PostService } from 'src/app/services/post.service';
@@ -14,16 +15,46 @@ export class GeneralPostComponent implements OnInit {
   public userInfo;
   public  token;
   public  url: string;
-  @Input()  posts: Array<any>;
+  @Input()  posts: Array<Post>;
   public  status: string;
-  public  idPost: number;
-  public postTS ; // Post to see
+  public  statusEdit: string;
+  //public  idPost: number;
+  public postTS: Post ; // Post to see
+  public categories;
+  public afuConfig;
   //public height;
 
   constructor(public _userService: UserService,
-    public _postService: PostService){
+    public _postService: PostService,
+    public _categoryService: CategoryService){
     this.loadUser();
+    this.postTS = new Post(-1,-1,-1,"","","");
     this.url = global_info.url;
+    this.afuConfig = {
+      multiple: false,
+      formatsAllowed: ".jpg, .png, .jpeg, .gif",
+      maxSize: "1",
+      uploadAPI:  {
+            url:global_info.url+"uploadImage",
+            method:"POST",
+            headers: {"Authorization" : this.token,},
+          },
+      theme: "attachPin",
+      hideProgressBar: false,
+      hideResetBtn: false,
+      hideSelectBtn: false,
+      fileNameIndex: true,
+      replaceTexts: {
+        selectFileBtn: 'Select Files',
+        resetBtn: 'Reset',
+        uploadBtn: 'Upload',
+        dragNDropBox: 'Drag N Drop',
+        attachPinBtn: 'Select the image for your post',
+        afterUploadMsg_success: 'Successfully Uploaded !',
+        afterUploadMsg_error: 'Upload Failed !',
+        sizeLimit: 'Size Limit'
+      }
+    };
   }
 
   ngOnInit(): void {
@@ -34,17 +65,18 @@ export class GeneralPostComponent implements OnInit {
   loadUser(){
     this.userInfo = this._userService.getInfoUser() ?? -1;
     this.token = this._userService.getToken();
+    this.getCategories();
   }
 
   loadIDpost(id){
-    this.idPost = id;
+    this.postTS.id = id;
   }
 
   deletePost(){
-    this._postService.deletePost(this.idPost, this.token).subscribe(
+    this._postService.deletePost(this.postTS.id, this.token).subscribe(
       response => {
         this.status = response.status;
-        this.deletePostOfArray(this.idPost); // To update the screen!
+        this.deletePostOfArray(this.postTS.id); // To update the screen!
         console.log(response);
       },
       er => {
@@ -75,5 +107,31 @@ export class GeneralPostComponent implements OnInit {
     this.postTS = this.posts[this.getPosOfPostInArray(id)];
     let posDate = this.postTS.created_at.indexOf("T");
     this.postTS.created_at = this.postTS.created_at.substr(0,posDate);
+  }
+
+  getCategories(){
+    this._categoryService.getCategories().subscribe(
+      response => {
+        this.categories = response.categories;
+      });
+  }
+
+  modifyPost(){
+    this._postService.update(this.postTS, this.token).subscribe(
+      response => {
+        this.statusEdit = response.status;
+        console.log(response);
+      },
+      er => {
+        this.statusEdit = er.error.status;
+        //this.message = er.error.message;
+        console.log(<any>er);
+      }
+    );
+  }
+
+  imageUpload(data){
+    console.log(data);
+    this.postTS.image = data.body.image;
   }
 }

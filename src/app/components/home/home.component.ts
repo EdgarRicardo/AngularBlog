@@ -1,5 +1,6 @@
 import { isNull } from '@angular/compiler/src/output/output_ast';
 import { Component, DoCheck, OnInit } from '@angular/core';
+import { Post } from 'src/app/Models/post';
 import { CategoryService } from 'src/app/services/category.service';
 import { global_info } from 'src/app/services/global_info';
 import { PostService } from 'src/app/services/post.service';
@@ -17,7 +18,7 @@ export class HomeComponent implements OnInit{
   title = 'Personal Blog';
   public userInfo;
   public token;
-  public posts: Array<Object>;
+  public posts: Array<Post>;
   public status: string;
 
 

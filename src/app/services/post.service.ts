@@ -34,12 +34,15 @@ export class PostService {
       return this._http.delete(this.url+link, {headers: headers});
   }
 
-  register(category, token){
-    return this.request(category, 'post/','post', token);
+  register(post, token){
+    return this.request(post, 'post/','post', token);
   }
 
 
   update(post, token){
+    delete post.uname;
+    delete post.usurname;
+    delete post.cname;
     return this.request(post, 'post/'+post.id,'put', token);
   }
 
