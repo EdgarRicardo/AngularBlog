@@ -11,8 +11,6 @@ export class IdentityGuard implements CanActivate {
     private _router: Router
   ){}
   canActivate(){
-      let user = this._userService.getInfoUser();
-
     /*this._userService.tokenValidation(token).subscribe(
       response => {
         return true;
@@ -22,9 +20,10 @@ export class IdentityGuard implements CanActivate {
         console.log(<any>er);
       }
     );*/
-    if(user) return true;
-    console.log("User not logged");
-    this._router.navigate['/login'];
-    return false;
+    if(this._userService.getInfoUser()) return true;
+    else {
+      console.log("User is not logged");
+      return this._router.parseUrl('/error');
+    }
   }
 }
