@@ -14,6 +14,11 @@
     overflow: auto;
     text-align: justify;
   }
+
+  .post-image{
+    height: 200px;
+    overflow: hidden;
+  }
 }
 
 
